@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./styles.css";
+import SpyCard from "./components/SpyCard";
+import Login from "./components/Login";
+import { Alert, AlertTitle } from "@mui/material";
 
 export default function App() {
   const [spyData, setSpyData] = useState({});
@@ -12,7 +15,12 @@ export default function App() {
       setLoading(true);
       setError(false);
       const spyInfo = await axios.get("https://randomuser.me/api/");
-      setSpyData(spyInfo);
+      if (spyInfo.data && spyInfo.data.results && spyInfo.data.results[0]) {
+        setSpyData(spyInfo.data.results[0]);
+      } else {
+        setSpyData({});
+      }
+      console.log(spyInfo);
     } catch {
       setError(true);
     } finally {
@@ -25,8 +33,17 @@ export default function App() {
 
   return (
     <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
+      {error && (
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          Error Loading Spy Data — <strong>Refresh Again</strong>
+        </Alert>
+      )}
+      {sessionStorage.getItem("isLoggedIn") ? (
+        <SpyCard isLoading={isLoading} spyData={spyData as spy} />
+      ) : (
+        <Login />
+      )}
     </div>
   );
 }
