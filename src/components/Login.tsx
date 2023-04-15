@@ -1,8 +1,12 @@
 import { Button, TextField, Grid, Paper, Typography } from "@mui/material";
 
-export default function Login() {
+interface loginProps {
+  handleLoginSuccess: () => void;
+}
+export default function Login({ handleLoginSuccess }: loginProps) {
   const handleLogin = () => {
     sessionStorage.setItem("isLoggedIn", "true");
+    handleLoginSuccess();
   };
   return (
     <Paper

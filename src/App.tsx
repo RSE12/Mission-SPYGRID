@@ -9,6 +9,7 @@ export default function App() {
   const [spyData, setSpyData] = useState({});
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleFetchSpyData = async () => {
     try {
@@ -39,14 +40,18 @@ export default function App() {
           Error Loading Spy Data — <strong>Refresh Again</strong>
         </Alert>
       )}
-      {sessionStorage.getItem("isLoggedIn") ? (
+      {sessionStorage.getItem("isLoggedIn") || loggedIn ? (
         <SpyCard
           isLoading={isLoading}
           spyData={spyData as spy}
           handleNext={handleFetchSpyData}
         />
       ) : (
-        <Login />
+        <Login
+          handleLoginSuccess={() => {
+            setLoggedIn(true);
+          }}
+        />
       )}
     </div>
   );
