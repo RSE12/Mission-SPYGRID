@@ -22,7 +22,15 @@ export default function SpyCard({
     name: {},
   };
   return (
-    <Card sx={{ maxWidth: "100%" }}>
+    <Card
+      sx={{
+        margin: "auto",
+        maxWidth: {
+          xs: "100%", // theme.breakpoints.up('xs')
+          sm: 500, // theme.breakpoints.up('sm')
+        },
+      }}
+    >
       {isLoading ? (
         <SpyCardSkeleton />
       ) : (

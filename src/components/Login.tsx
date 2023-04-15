@@ -5,7 +5,14 @@ export default function Login() {
     sessionStorage.setItem("isLoggedIn", "true");
   };
   return (
-    <Paper>
+    <Paper
+      sx={{
+        width: {
+          xs: "100%", // theme.breakpoints.up('xs')
+          sm: 500, // theme.breakpoints.up('sm')
+        },
+      }}
+    >
       <Typography
         component="h4"
         variant="h4"
