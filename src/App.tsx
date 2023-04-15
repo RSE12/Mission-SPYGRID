@@ -40,7 +40,11 @@ export default function App() {
         </Alert>
       )}
       {sessionStorage.getItem("isLoggedIn") ? (
-        <SpyCard isLoading={isLoading} spyData={spyData as spy} />
+        <SpyCard
+          isLoading={isLoading}
+          spyData={spyData as spy}
+          handleNext={handleFetchSpyData}
+        />
       ) : (
         <Login />
       )}
