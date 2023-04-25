@@ -5,6 +5,7 @@ interface loginProps {
 }
 export default function Login({ handleLoginSuccess }: loginProps) {
   const handleLogin = () => {
+    console.log("clicked");
     sessionStorage.setItem("isLoggedIn", "true");
     handleLoginSuccess();
   };
@@ -28,10 +29,18 @@ export default function Login({ handleLoginSuccess }: loginProps) {
       </Typography>
       <Grid container rowSpacing={1}>
         <Grid item xs={12}>
-          <TextField label="SPY ID"></TextField>
+          <TextField
+            label="SPY ID"
+            data-testid="spyId"
+            name="spyId"
+          ></TextField>
         </Grid>
         <Grid item xs={12}>
-          <TextField label="Password" type={"password"}></TextField>
+          <TextField
+            name="password"
+            label="Password"
+            type={"password"}
+          ></TextField>
         </Grid>
         <Grid item xs={12}>
           <Button fullWidth onClick={handleLogin}>
